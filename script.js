@@ -76,23 +76,6 @@ animateElements.forEach(el => {
     observer.observe(el);
 });
 
-const contactForm = document.getElementById('contact-form');
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
-    };
-    
-    console.log('Form submitted:', formData);
-    
-    alert('Thank you for your message! I will get back to you soon.');
-    contactForm.reset();
-});
-
 const skillBars = document.querySelectorAll('.skill-progress');
 const skillObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -133,56 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-const cursor = document.createElement('div');
-cursor.style.cssText = `
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--primary);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s, opacity 0.3s;
-    opacity: 0;
-`;
-document.body.appendChild(cursor);
-
-let mouseX = 0;
-let mouseY = 0;
-let cursorX = 0;
-let cursorY = 0;
-
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.opacity = '1';
-});
-
-document.addEventListener('mouseleave', () => {
-    cursor.style.opacity = '0';
-});
-
-function animateCursor() {
-    cursorX += (mouseX - cursorX) * 0.2;
-    cursorY += (mouseY - cursorY) * 0.2;
-    
-    cursor.style.left = cursorX - 10 + 'px';
-    cursor.style.top = cursorY - 10 + 'px';
-    
-    requestAnimationFrame(animateCursor);
-}
-
-animateCursor();
-
 const buttons = document.querySelectorAll('.btn, .nav-link, .social-link, .project-btn');
 buttons.forEach(btn => {
     btn.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'scale(1.5)';
-        cursor.style.borderColor = 'var(--secondary)';
-    });
-    
-    btn.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'scale(1)';
-        cursor.style.borderColor = 'var(--primary)';
     });
 });
